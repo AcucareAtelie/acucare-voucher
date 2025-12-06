@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Açucaré | Voucher VIP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --verde-escuro: #0f3c2e;
+      --bege: #d5b18c;
+      --bege-claro: #f4e3cf;
+      --branco: #ffffff;
+      --marrom: #3b2716;
+      --texto-claro: #fdfaf5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #145c45 0, #0b231b 48%, #04100b 100%);
+      color: var(--texto-claro);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 16px 10px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 880px;
+      background: linear-gradient(145deg, rgba(5, 32, 24, 0.98), rgba(3, 18, 13, 0.98));
+      border-radius: 18px;
+      padding: 16px 18px 18px;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.55);
+      border: 1px solid rgba(213, 177, 140, 0.4);
+    }
+
+    .hero {
+      margin-bottom: 10px;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(213, 177, 140, 0.16);
+      color: var(--bege-claro);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-title {
+      font-size: 18px;
+      margin-top: 6px;
+      margin-bottom: 2px;
+      color: var(--branco);
+    }
+
+    .hero-subtitle {
+      font-size: 12px;
+      color: rgba(244, 227, 207, 0.84);
+    }
+
+    .vip-card {
+      margin-top: 12px;
+      background: #d5b18c;
+      color: #3b2716;
+      border-radius: 18px;
+      padding: 12px 14px 14px;
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .vip-header {
+      margin-bottom: 8px;
+    }
+
+    .vip-header h2 {
+      font-size: 15px;
+      margin: 0 0 2px 0;
+    }
+
+    .vip-header p {
+      font-size: 11px;
+      margin: 0;
+      color: rgba(59, 39, 22, 0.9);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .form-group {
+      flex: 1 1 170px;
+      min-width: 0;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid #c28c5e;
+      font-size: 13px;
+      outline: none;
+      background: #f8ecde;
+      color: #2c1a10;
+    }
+
+    .form-input::placeholder {
+      color: #b08d6c;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #c28c5e;
+      padding: 8px 10px;
+      font-size: 13px;
+      resize: vertical;
+      min-height: 60px;
+      background: #f8ecde;
+    }
+
+    .submit-btn {
+      margin-top: 6px;
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: none;
+      background: #3b2716;
+      color: var(--bege-claro);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 10px 20px rgba(84, 51, 30, 0.7);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      background: #4a2f1b;
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(84, 51, 30, 0.55);
+    }
+
+    .form-status {
+      margin-top: 6px;
+      font-size: 11px;
+      min-height: 16px;
+    }
+
+    .form-status.ok {
+      color: #1c6f3c;
+    }
+
+    .form-status.error {
+      color: #b91c1c;
+    }
+
+    .voucher-highlight {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(6, 22, 17, 0.95);
+      color: #bbf7d0;
+      font-family: "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #25d366;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .whatsapp-btn:hover {
+      filter: brightness(1.05);
+    }
+
+    .helper {
+      font-size: 10px;
+      color: rgba(59, 39, 22, 0.85);
+    }
+
+    footer {
+      margin-top: 12px;
+      font-size: 10px;
+      color: rgba(244, 227, 207, 0.7);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    // impede acesso direto sem login
+    if (localStorage.getItem("acucare_logged") !== "yes") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="page">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-kicker">Uso interno · VIP</div>
+        <h1 class="hero-title">Criar voucher VIP</h1>
+        <p class="hero-subtitle">
+          Gere vouchers especiais para clientes queridos, para ações pontuais ou mimos personalizados.
+        </p>
+      </section>
+
+      <section class="vip-card">
+        <div class="vip-header">
+          <h2>Dados do cliente e do benefício</h2>
+          <p>Preencha os dados abaixo para gerar um voucher exclusivo e enviar pelo WhatsApp.</p>
+        </div>
+
+        <form id="vip-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nome">Nome do cliente *</label>
+              <input
+                class="form-input"
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Ex: Ana, cliente especial da Barra Funda"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="telefone">Celular (WhatsApp) *</label>
+              <input
+                class="form-input"
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(11) 9XXXX-XXXX"
+                required
+              />
+              <div class="helper">Usaremos esse número para enviar o voucher e registrar o uso.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="tipo">Tipo de voucher</label>
+              <select class="form-select" id="tipo" name="tipo">
+                <option value="VOUCHER_VIP_15">15% de desconto VIP</option>
+                <option value="VOUCHER_VIP_20">20% de desconto VIP</option>
+                <option value="VOUCHER_VIP_DOCINHO">Docinho extra de brinde</option>
+                <option value="VOUCHER_VIP_ANIVERSARIO">Mimo de aniversário</option>
+                <option value="VOUCHER_VIP_OUTRO">Outro benefício (descrever abaixo)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="detalhes">Descrição do benefício (opcional)</label>
+            <textarea
+              id="detalhes"
+              name="detalhes"
+              placeholder="Ex: 20% de desconto em qualquer pedido acima de R$ 80, válido até o fim do mês."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Gerar voucher VIP</button>
+
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </section>
+
+      <footer>
+        Uso interno Açucaré · Vouchers VIP
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbyS_bx73KJ1ZNW3867y7RzZf9-C555Kstu3MfacEfYpsktnNSuKMddYXYepcG2NNkbE/exec";
+
+    const form = document.getElementById("vip-form");
+    const statusEl = document.getElementById("form-status");
+    const telInput = document.getElementById("telefone");
+
+    // máscara simples de telefone (11 dígitos)
+    telInput.addEventListener("input", () => {
+      let digits = telInput.value.replace(/\D/g, "").slice(0, 11);
+
+      if (digits.length <= 2) {
+        telInput.value = `(${digits}`;
+      } else if (digits.length <= 7) {
+        telInput.value = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+      } else if (digits.length <= 11) {
+        telInput.value = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+      }
+    });
+
+    function normalizarTelefone(tel) {
+      return String(tel || "").replace(/\D/g, "");
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      statusEl.className = "form-status";
+      statusEl.textContent = "";
+
+      const nome = form.nome.value.trim();
+      const telefone = form.telefone.value.trim();
+      const tipo = form.tipo.value;
+      const detalhes = form.detalhes.value.trim();
+
+      const telNums = normalizarTelefone(telefone);
+      if (telNums.length !== 11) {
+        statusEl.className = "form-status error";
+        statusEl.textContent = "Informe um telefone válido com DDD (11 dígitos).";
+        return;
+      }
+
+      statusEl.textContent = "Gerando voucher VIP...";
+
+      const payload = {
+        action: "create_vip",
+        nome,
+        telefone,
+        tipo,
+        detalhes
+      };
+
+      fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.ok) {
+            statusEl.className = "form-status error";
+            statusEl.textContent = data.mensagem || "Não foi possível gerar o voucher VIP.";
+            return;
+          }
+
+          const codigo = data.codigo;
+          const msgBase =
+            data.mensagem || "Voucher VIP criado com sucesso! Envie para o cliente e aplique no pedido.";
+
+          const whatsappURL = `https://wa.me/55${telNums}?text=${encodeURIComponent(
+            `Olá! Você recebeu um *voucher VIP* da Açucaré 💚\n\n` +
+              `Seu código é: ${codigo}\n` +
+              `${detalhes ? "\nBenefício: " + detalhes + "\n" : ""}\n` +
+              `Para usar, informe esse código na hora de fechar seu pedido.`
+          )}`;
+
+          statusEl.className = "form-status ok";
+          statusEl.innerHTML = `
+            <div>${msgBase}</div>
+            <div class="voucher-highlight">${codigo}</div>
+            <a href="${whatsappURL}" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+              Enviar por WhatsApp para o cliente
+            </a>
+          `;
+
+          form.reset();
+        })
+        .catch((err) => {
+          console.error(err);
+          statusEl.className = "form-status error";
+          statusEl.textContent =
+            "Erro ao gerar o voucher VIP. Verifique sua conexão e tente novamente.";
+        });
+    });
+  </script>
+</body>
+</html>
