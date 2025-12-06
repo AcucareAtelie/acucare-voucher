@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Açucaré • Painel Interno</title>
+  <style>
+    :root {
+      --verde-escuro: #0f3c2e;
+      --bege: #d5b18c;
+      --bege-claro: #f4e3cf;
+      --marrom: #3b2716;
+      --texto-claro: #f8ecde;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--verde-escuro);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--texto-claro);
+      min-height: 100vh;
+    }
+
+    .page {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* MENU LATERAL */
+    .sidebar {
+      width: 260px;
+      background: #0b2d23;
+      padding: 18px 16px 24px;
+      box-shadow: 4px 0 18px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-header {
+      margin-bottom: 10px;
+      
+    }
+
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+        }
+
+    .logo-img {
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      border: 2px solid var(--bege);
+      object-fit: cover;
+      background: var(--verde-escuro);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+    }
+
+    .sidebar-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-title span {
+      color: #6ee7b7; /* verdinho */
+    }
+
+    .sidebar-subtitle {
+      font-size: 11px;
+      color: rgba(244, 227, 207, 0.8);
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: none;
+      background: var(--bege);
+      color: var(--marrom);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+      transition: transform 0.08s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+      background: var(--bege-claro);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-btn.primary {
+      background: var(--bege-claro);
+    }
+
+    .nav-btn.logout {
+      margin-top: auto;
+      background: #2a1a11;
+      color: var(--bege-claro);
+    }
+
+    /* ÁREA PRINCIPAL */
+    .content {
+      flex: 1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .content-header {
+      font-size: 13px;
+      color: rgba(244, 227, 207, 0.8);
+      padding: 4px 6px;
+    }
+
+    .frame-wrapper {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.65);
+      background: #000;
+    }
+
+    .frame-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* MOBILE: menu em cima, conteúdo embaixo */
+    @media (max-width: 768px) {
+      .page {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: column;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+      }
+
+      .content {
+        padding: 10px;
+        min-height: calc(100vh - 180px);
+      }
+
+      .nav-btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Protege o painel: se não estiver logado, manda pro login
+  if (localStorage.getItem("acucare_logged") !== "yes") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<div class="page">
+  <!-- MENU LATERAL -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-wrapper">
+        <img src="acucare_logo.png" alt="Açucaré" class="logo-img" />
+      </div>
+      <div class="sidebar-title">
+        Bem-vindo, Açucaré <span>💚</span>
+      </div>
+      <div class="sidebar-subtitle">
+        Painel interno de vouchers.
+      </div>
+    </div>
+   
+
+    <div class="nav-group">
+      <button class="nav-btn primary" onclick="abrirPagina('validar.html')">
+        Validar voucher
+      </button>
+      <button class="nav-btn" onclick="abrirPagina('vip.html')">
+        Criar voucher especial
+      </button>
+    </div>
+
+    <button class="nav-btn logout" onclick="logout()">
+      Sair
+    </button>
+  </aside>
+
+  <!-- ÁREA DE CONTEÚDO -->
+  <main class="content">
+    <div class="content-header">
+      Selecione uma opção no menu para trabalhar com vouchers.
+    </div>
+    <div class="frame-wrapper">
+      <!-- começa já na validação -->
+      <iframe id="admin-frame" src="validar.html"></iframe>
+    </div>
+  </main>
+</div>
+
+<script>
+  function abrirPagina(pagina) {
+    const frame = document.getElementById('admin-frame');
+    frame.src = pagina;
+  }
+
+  function logout() {
+    localStorage.removeItem("acucare_logged");
+    localStorage.removeItem("acucare_user");
+    localStorage.removeItem("acucare_role");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

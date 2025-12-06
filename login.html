@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Açucaré • Acesso Interno</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #0f3c2e;
+      color: #f5eee6;
+      font-family: system-ui;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: #d5b18c;
+      padding: 22px 26px;
+      border-radius: 16px;
+      width: 92%;
+      max-width: 360px;
+      color: #3b2716;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+    h2 {
+      margin: 0 0 10px 0;
+      color:#3b2716;
+    }
+    label {
+      font-size: 13px;
+      margin-top: 8px;
+      display: block;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #a57d57;
+      margin-top: 4px;
+      background: #f8ecde;
+      font-size: 14px;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: #3b2716;
+      color: #f8ecde;
+      border-radius: 8px;
+      border: none;
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .status {
+      margin-top: 10px;
+      font-size: 13px;
+      min-height: 18px;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2>Acesso interno</h2>
+
+    <label>Usuário</label>
+    <input type="text" id="user">
+
+    <label>Senha</label>
+    <input type="password" id="pass">
+
+    <button class="btn" onclick="login()">Entrar</button>
+
+    <div id="status" class="status"></div>
+  </div>
+
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyS_bx73KJ1ZNW3867y7RzZf9-C555Kstu3MfacEfYpsktnNSuKMddYXYepcG2NNkbE/exec";
+    
+    async function login() {
+      const usuario = document.getElementById("user").value.trim();
+      const senha = document.getElementById("pass").value.trim();
+      const status = document.getElementById("status");
+    
+      status.textContent = "Validando...";
+    
+      const payload = {
+        action: "login",
+        usuario,
+        senha
+      };
+    
+      try {
+        const r = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+    
+        const data = await r.json();
+    
+        if (!data.ok) {
+          status.textContent = data.mensagem || "Falha no login.";
+          return;
+        }
+    
+        // Login OK → salva no localStorage
+        localStorage.setItem("acucare_logged", "yes");
+        localStorage.setItem("acucare_user", data.usuario);
+        localStorage.setItem("acucare_role", data.papel);
+    
+        window.location.href = "admin.html";
+    
+      } catch (e) {
+        console.error(e);
+        status.textContent = "Erro ao comunicar com o servidor.";
+      }
+    }
+    </script>
+</body>
+</html>

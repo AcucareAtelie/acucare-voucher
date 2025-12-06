@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Açucaré | Desconto no Primeiro Pedido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --verde-escuro: #0f3c2e;
+      --bege: #d5b18c;
+      --bege-claro: #f4e3cf;
+      --dourado: #e8cfaa;
+      --branco: #ffffff;
+      --texto-claro: #fdfaf5;
+      --erro: #ff6b6b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--verde-escuro);
+      color: var(--texto-claro);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 18px 32px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .logo-img {
+      width: 110px;   /* antes era 92px */
+      height: 110px;  /* antes era 92px */
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid var(--dourado);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+      background: var(--verde-escuro);
+    }
+
+    .logo-text {
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--dourado);
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--bege-claro);
+      opacity: 0.9;
+    }
+
+    .hero {
+      background: radial-gradient(circle at top left, #1b6045, var(--verde-escuro));
+      border-radius: 18px;
+      padding: 18px 16px 20px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(232, 207, 170, 0.18);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(213, 177, 140, 0.16);
+      color: var(--bege-claro);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      color: var(--branco);
+    }
+
+    .hero-title span {
+      color: var(--bege);
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--bege-claro);
+      margin-bottom: 14px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(13, 28, 23, 0.7);
+      border: 1px solid rgba(232, 207, 170, 0.3);
+      color: var(--bege-claro);
+    }
+
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, var(--bege), var(--bege-claro));
+      color: #4b2e1a;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-footnote {
+      margin-top: 8px;
+      font-size: 11px;
+      color: rgba(244, 227, 207, 0.85);
+    }
+
+    .section-title {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--dourado);
+      margin: 18px 0 10px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .step-card {
+      background: rgba(6, 22, 17, 0.9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(213, 177, 140, 0.26);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: var(--bege);
+      color: #4b2e1a;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .step-content-title {
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: var(--branco);
+    }
+
+    .step-content-text {
+      font-size: 12px;
+      color: rgba(244, 227, 207, 0.9);
+    }
+
+    .form-card {
+      margin-top: 14px;
+      background: var(--bege);
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      color: #3d2414;
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .form-card h2 {
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .form-card p {
+      font-size: 12px;
+      margin-bottom: 10px;
+      color: #5b3822;
+    }
+
+    .form-row {
+      margin-bottom: 9px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .required {
+      color: #b3261e;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 8px 9px;
+      border-radius: 999px;
+      border: 1px solid #c2946f;
+      font-size: 13px;
+      outline: none;
+      background: #f8ecde;
+      color: #3d2414;
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: #8b5b3b;
+      box-shadow: 0 0 0 1px rgba(139, 91, 59, 0.4);
+    }
+
+    .helper-text {
+      font-size: 10px;
+      color: #6a4630;
+      margin-top: 2px;
+    }
+
+    .form-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin: 6px 0 10px;
+    }
+
+    .form-checkbox-row input[type="checkbox"] {
+      margin-top: 2px;
+    }
+
+    .form-checkbox-row label {
+      font-size: 11px;
+      color: #5b3822;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #3d2414;
+      color: var(--bege-claro);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+      box-shadow: 0 10px 20px rgba(84, 51, 30, 0.7);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+      background: #4a2f1b;
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 8px 16px rgba(84, 51, 30, 0.55);
+    }
+
+    .form-status {
+      margin-top: 8px;
+      font-size: 11px;
+      min-height: 14px;
+    }
+
+    .form-status.ok {
+      color: #1c6f3c;
+    }
+
+    .form-status.error {
+      color: var(--erro);
+    }
+
+    /* destaque visual pro voucher */
+    .form-status.ok.voucher-highlight {
+      background: rgba(15, 60, 46, 0.08);
+      border-radius: 12px;
+      padding: 8px 10px;
+      text-align: center;
+      border: 1px solid rgba(15, 60, 46, 0.35);
+    }
+
+    .voucher-code {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      margin-top: 4px;
+      margin-bottom: 2px;
+      color: #1c6f3c;
+    }
+
+    .voucher-note {
+      display: block;
+      font-size: 11px;
+      color: #355c46;
+    }
+    .trust-text {
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(244, 227, 207, 0.9);
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 11px;
+      color: rgba(244, 227, 207, 0.7);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--bege);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (min-width: 600px) {
+      .container {
+        padding-top: 26px;
+      }
+
+      .hero {
+        padding: 22px 18px 24px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .step-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .step-number {
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+
+      <header>
+        <div class="logo-wrapper">
+          <!-- TROQUE LOGO_URL_AQUI pelo caminho/URL real do seu logo -->
+          <img src="acucare_logo.png" alt="Açucaré" class="logo-img" />
+          <div class="logo-text">Açucaré</div>
+        </div>
+        <p class="tagline">Doces premium, feitos sob medida para momentos especiais.</p>
+      </header>
+
+      <section class="hero">
+        <div class="hero-kicker">
+          <span>Oferta exclusiva · Barra Funda & Jardim Íris</span>
+        </div>
+        <h1 class="hero-title">
+          Ganhe <span> 15% de desconto no seu primeiro pedido</span>.
+        </h1>
+        <p class="hero-subtitle">
+          Se cadastre em poucos segundos e receba um código de desconto para usar em doces selecionados.
+        </p>
+        <div class="hero-pills">
+          <span class="pill">Bolos de pote</span>
+          <span class="pill">Tortas especiais</span>
+          <span class="pill">Cookies</span>
+          <span class="pill">Outros</span>
+        </div>
+        <button class="hero-btn" onclick="scrollToForm()">
+          Quero meu desconto 🍬
+        </button>
+        <p class="hero-footnote">Válido apenas para primeiro pedido por cliente. Sujeito à disponibilidade e regras da Açucaré.</p>
+      </section>
+
+      <section>
+        <h2 class="section-title">Como funciona</h2>
+        <div class="steps">
+          <article class="step-card">
+            <div class="step-number">1</div>
+            <div>
+              <h3 class="step-content-title">Você se cadastra</h3>
+              <p class="step-content-text">Nome, celular e app em que prefere falar com a gente (WhatsApp ou Instagram).</p>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">2</div>
+            <div>
+              <h3 class="step-content-title">Recebe seu código</h3>
+              <p class="step-content-text">Enviamos um voucher exclusivo de primeiro pedido para o seu número.</p>
+            </div>
+          </article>
+
+          <article class="step-card">
+            <div class="step-number">3</div>
+            <div>
+              <h3 class="step-content-title">Usa no pedido</h3>
+              <p class="step-content-text">Informe o código na hora de finalizar o seu pedido e aproveite o desconto nos seus doces favoritos.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="form-section" class="form-card">
+        <h2>Peça seu desconto de boas-vindas</h2>
+        <p>Preencha seus dados e receba um voucher de desconto exclusivo para o seu primeiro pedido na Açucaré.</p>
+
+        <form id="voucher-form">
+          <div class="form-row">
+            <label class="form-label" for="nome">
+              Nome completo <span class="required">*</span>
+            </label>
+            <input class="form-input" type="text" id="nome" name="nome" required />
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="telefone">
+              Celular (WhatsApp) <span class="required">*</span>
+            </label>
+            <input class="form-input" type="tel" id="telefone" name="telefone" inputmode="tel" placeholder="(11) 9XXXX-XXXX" required />
+            <div class="helper-text">O voucher ficará vinculado a esse número de celular.</div>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="canal">
+              Onde você costuma pedir? <span class="required">*</span>
+            </label>
+            <select class="form-select" id="canal" name="canal" required>
+              <option value="">Selecione uma opção</option>
+              <option value="whatsapp">WhatsApp</option>
+              <option value="instagram">Instagram</option>
+            </select>
+          </div>
+
+          <div class="form-checkbox-row">
+            <input type="checkbox" id="lgpd" required />
+            <label for="lgpd">
+              Autorizo o uso dos meus dados para contato sobre meu voucher e comunicações da Açucaré. Não compartilhamos com terceiros.
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Gerar meu voucher 💚
+          </button>
+
+          <div id="form-status" class="form-status"></div>
+        </form>
+      </section>
+
+      <p class="trust-text">
+        Produção artesanal, ingredientes tradicionais (não trabalhamos com alergênicos) e aquele cuidado e carinho que seu dia merece.
+      </p>
+
+      <footer>
+        Açucaré · Barra Funda & Jardim Íris · São Paulo/SP<br />
+        Pedidos também via <strong>iFood · 99 Food · Keeta · WhatsApp · Instagram</strong><br />
+        <a href="https://www.instagram.com/acucare.atelie" target="_blank" rel="noopener noreferrer">@acucare.atelie</a>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    function scrollToForm() {
+      const formSection = document.getElementById('form-section');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  
+    const form = document.getElementById('voucher-form');
+    const statusEl = document.getElementById('form-status');
+  
+    // URL do seu Web App do Apps Script
+    const API_URL = 'https://script.google.com/macros/s/AKfycbyS_bx73KJ1ZNW3867y7RzZf9-C555Kstu3MfacEfYpsktnNSuKMddYXYepcG2NNkbE/exec';
+  
+    // Campo de telefone com máscara
+    const telInput = document.getElementById('telefone');
+  
+    telInput.addEventListener('input', () => {
+      let v = telInput.value.replace(/\D/g, ''); // só dígitos
+      if (v.length > 11) v = v.slice(0, 11);     // máximo 11 dígitos
+  
+      let formatted = '';
+  
+      if (v.length > 0) {
+        if (v.length <= 2) {
+          // (11
+          formatted = '(' + v;
+        } else if (v.length <= 6) {
+          // (11) 9XXX
+          formatted = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+        } else if (v.length <= 10) {
+          // (11) 3XXX-XXXX  (fixo ou incompleto)
+          formatted = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+        } else {
+          // (11) 9XXXX-XXXX  (celular 11 dígitos)
+          formatted = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+        }
+      }
+  
+      telInput.value = formatted;
+    });
+  
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+  
+      statusEl.className = 'form-status';
+      statusEl.textContent = '';
+  
+      const nome = form.nome.value;
+      const rawTel = form.telefone.value || '';
+      const telDigits = rawTel.replace(/\D/g, ''); // tira formatação
+      const canal = form.canal.value;
+  
+      // valida tamanho (10 ou 11 dígitos)
+      if (telDigits.length < 10 || telDigits.length > 11) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Por favor, informe um celular válido com DDD.';
+        return;
+      }
+  
+      statusEl.textContent = 'Enviando seus dados...';
+  
+      const payload = {
+        nome: nome,
+        telefone: telDigits, // vai limpinho pro Apps Script
+        canal: canal
+      };
+  
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok) {
+          // mensagem base que vem do Apps Script ou um padrão
+          const baseMsg = data.mensagem || 'Voucher gerado com sucesso! 💚';
+
+          if (data.codigo) {
+            const codigo = data.codigo;
+
+            // link de whatsapp com mensagem pronta
+            const whatsappURL = `https://wa.me/5511991160707?text=${encodeURIComponent(
+              `Olá! Quero meus 15% de desconto da Açucaré. Meu voucher é: ${codigo}`
+            )}`;
+
+            statusEl.className = 'form-status ok voucher-highlight';
+            statusEl.innerHTML = `
+              <span>${baseMsg}</span>
+              <span class="voucher-code">${codigo}</span>
+
+              <a 
+                href="${whatsappURL}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="whatsapp-btn"
+                style="
+                  display:inline-block;
+                  margin-top:10px;
+                  padding:8px 14px;
+                  background:#25d366;
+                  color:white;
+                  border-radius:999px;
+                  font-weight:600;
+                  font-size:13px;
+                  text-decoration:none;
+                  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+                "
+              >
+                Usar agora no WhatsApp
+              </a>
+
+              <span class="voucher-note">
+                Caso prefira, copie o código e use na hora do seu primeiro pedido.
+              </span>
+            `;
+          } else {
+            // caso raro: ok mas sem código (ex: já tem voucher)
+            statusEl.className = 'form-status ok';
+            statusEl.textContent = baseMsg;
+          }
+
+          form.reset();
+        } else {
+          statusEl.className = 'form-status error';
+          statusEl.textContent =
+            data.mensagem || 'Não foi possível gerar o voucher. Tente novamente.';
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        statusEl.className = 'form-status error';
+        statusEl.textContent =
+          'Erro ao enviar seus dados. Verifique sua conexão e tente novamente.';
+      });
+    });
+  </script>
+  </body>
+</html>
