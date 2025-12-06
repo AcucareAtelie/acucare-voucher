@@ -233,6 +233,12 @@
       color: rgba(244, 227, 207, 0.86);
     }
 
+    .voucher-type {
+      font-size: 11px;
+      color: #fef3c7; /* amarelinho suave */
+      font-weight: 500;
+    }
+
     .bullet {
       opacity: 0.6;
     }
@@ -380,6 +386,28 @@
       }
     }
 
+    function formatarTipoVoucher(tipo) {
+      if (!tipo) return 'Tipo não informado';
+
+      const t = String(tipo).toUpperCase();
+
+      switch (t) {
+        case 'DESCONTO_PRIMEIRO_PEDIDO':
+          return 'Desconto de boas-vindas';
+        case 'VOUCHER_VIP_15':
+          return '15% de desconto VIP';
+        case 'VOUCHER_VIP_20':
+          return '20% de desconto VIP';
+        case 'VOUCHER_VIP_DOCINHO':
+          return 'Docinho extra de brinde';
+        case 'VOUCHER_VIP_ANIVERSARIO':
+          return 'Mimo de aniversário';
+        default:
+          // se vier algum código diferente, mostra como está
+          return tipo;
+      }
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
@@ -419,6 +447,7 @@
             const telefoneMascarado = mascararTelefone(data.telefone || '');
             const nome = data.nome || 'Cliente não identificado';
             const dataGeracao = formatarDataBR(data.dataGeracao);
+            const tipoLegivel = formatarTipoVoucher(data.tipo);
 
             const pillClass =
               statusLabel === 'NOVO'
@@ -436,6 +465,8 @@
                   <span class="voucher-phone">${telefoneMascarado}</span>
                   <span class="bullet">•</span>
                   <span class="voucher-date">Gerado em ${dataGeracao}</span>
+                  <span class="bullet">•</span>
+                  <span class="voucher-type">${tipoLegivel}</span>
                 </div>
               </div>
               <div class="voucher-side">
