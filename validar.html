@@ -312,6 +312,11 @@
   </style>
 </head>
 <body>
+  <script>
+    if (localStorage.getItem("acucare_logged") !== "yes") {
+      window.location.href = "login.html";
+    }
+  </script>
   <div class="page">
     <div class="container">
       <section class="hero">
