@@ -54,8 +54,8 @@
     }
 
     .logo-img {
-      width: 110px;   /* antes era 92px */
-      height: 110px;  /* antes era 92px */
+      width: 110px;
+      height: 110px;
       border-radius: 999px;
       object-fit: cover;
       border: 2px solid var(--dourado);
@@ -237,6 +237,42 @@
       color: #5b3822;
     }
 
+    .form-steps-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .step-indicators {
+      display: flex;
+      gap: 4px;
+      font-size: 11px;
+    }
+
+    .step-indicator {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(61, 36, 20, 0.18);
+      background: rgba(248, 236, 222, 0.7);
+      color: #5b3822;
+    }
+
+    .step-indicator.active {
+      background: #3d2414;
+      color: var(--bege-claro);
+      border-color: #3d2414;
+      font-weight: 600;
+    }
+
+    .step-caption {
+      font-size: 11px;
+      color: #7a5236;
+      text-align: right;
+      flex: 1;
+    }
+
     .form-row {
       margin-bottom: 9px;
     }
@@ -290,13 +326,12 @@
       color: #5b3822;
     }
 
-    .submit-btn {
+    .submit-btn,
+    .secondary-btn {
       width: 100%;
       padding: 9px 14px;
       border-radius: 999px;
       border: none;
-      background: #3d2414;
-      color: var(--bege-claro);
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
@@ -308,14 +343,34 @@
       box-shadow: 0 10px 20px rgba(84, 51, 30, 0.7);
     }
 
-    .submit-btn:hover {
-      transform: translateY(-1px);
-      background: #4a2f1b;
+    .submit-btn {
+      background: #3d2414;
+      color: var(--bege-claro);
     }
 
-    .submit-btn:active {
+    .secondary-btn {
+      background: #f8ecde;
+      color: #3d2414;
+      box-shadow: 0 6px 14px rgba(84, 51, 30, 0.4);
+      font-size: 13px;
+    }
+
+    .submit-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-1px);
+      background: #4a2f1b;
+      color: var(--bege-claro);
+    }
+
+    .submit-btn:active,
+    .secondary-btn:active {
       transform: translateY(0);
       box-shadow: 0 8px 16px rgba(84, 51, 30, 0.55);
+    }
+
+    .secondary-btn:hover {
+      background: #4a2f1b;
+      color: var(--bege-claro);
     }
 
     .form-status {
@@ -332,7 +387,6 @@
       color: var(--erro);
     }
 
-    /* destaque visual pro voucher */
     .form-status.ok.voucher-highlight {
       background: rgba(15, 60, 46, 0.08);
       border-radius: 12px;
@@ -356,6 +410,7 @@
       font-size: 11px;
       color: #355c46;
     }
+
     .trust-text {
       margin-top: 10px;
       font-size: 11px;
@@ -377,6 +432,19 @@
 
     footer a:hover {
       text-decoration: underline;
+    }
+
+    .form-step {
+      transition: opacity 0.2s ease;
+    }
+
+    .form-step.hidden {
+      display: none;
+      opacity: 0;
+    }
+
+    .form-step.visible {
+      opacity: 1;
     }
 
     @media (min-width: 600px) {
@@ -413,7 +481,6 @@
 
       <header>
         <div class="logo-wrapper">
-          <!-- TROQUE LOGO_URL_AQUI pelo caminho/URL real do seu logo -->
           <img src="acucare_logo.png" alt="Açucaré" class="logo-img" />
           <div class="logo-text">Açucaré</div>
         </div>
@@ -428,7 +495,7 @@
           Ganhe <span> 15% de desconto no seu primeiro pedido</span>.
         </h1>
         <p class="hero-subtitle">
-          Se cadastre em poucos segundos e receba um código de desconto para usar em doces selecionados.
+          Em poucos segundos você garante seu voucher de boas-vindas para usar em doces selecionados.
         </p>
         <div class="hero-pills">
           <span class="pill">Bolos de pote</span>
@@ -448,72 +515,107 @@
           <article class="step-card">
             <div class="step-number">1</div>
             <div>
-              <h3 class="step-content-title">Você se cadastra</h3>
-              <p class="step-content-text">Nome, celular e app em que prefere falar com a gente (WhatsApp ou Instagram).</p>
+              <h3 class="step-content-title">Você se apresenta</h3>
+              <p class="step-content-text">Nos conta seu nome e por onde costuma falar com a gente (WhatsApp ou Instagram).</p>
             </div>
           </article>
 
           <article class="step-card">
             <div class="step-number">2</div>
             <div>
-              <h3 class="step-content-title">Recebe seu código</h3>
-              <p class="step-content-text">Enviamos um voucher exclusivo de primeiro pedido para o seu número.</p>
+              <h3 class="step-content-title">Confirma o WhatsApp</h3>
+              <p class="step-content-text">O voucher fica vinculado ao seu número, para garantir um desconto de boas-vindas por cliente.</p>
             </div>
           </article>
 
           <article class="step-card">
             <div class="step-number">3</div>
             <div>
-              <h3 class="step-content-title">Usa no pedido</h3>
-              <p class="step-content-text">Informe o código na hora de finalizar o seu pedido e aproveite o desconto nos seus doces favoritos.</p>
+              <h3 class="step-content-title">Recebe e usa</h3>
+              <p class="step-content-text">Enviamos o código para o seu WhatsApp e você usa no seu primeiro pedido.</p>
             </div>
           </article>
         </div>
       </section>
 
       <section id="form-section" class="form-card">
-        <h2>Peça seu desconto de boas-vindas</h2>
-        <p>Preencha seus dados e receba um voucher de desconto exclusivo para o seu primeiro pedido na Açucaré.</p>
+        <div class="form-steps-header">
+          <div class="step-indicators">
+            <span id="indicator-step-1" class="step-indicator active">Passo 1</span>
+            <span id="indicator-step-2" class="step-indicator">Passo 2</span>
+          </div>
+          <div id="step-caption" class="step-caption">Leva menos de 30 segundos 🙂</div>
+        </div>
 
         <form id="voucher-form">
-          <div class="form-row">
-            <label class="form-label" for="nome">
-              Nome completo <span class="required">*</span>
-            </label>
-            <input class="form-input" type="text" id="nome" name="nome" required />
+          <!-- PASSO 1 -->
+          <div id="step-1" class="form-step visible">
+            <h2>Comece pelo seu nome</h2>
+            <p>Primeiro, queremos saber quem é você e por onde prefere falar com a gente.</p>
+
+            <div class="form-row">
+              <label class="form-label" for="nome">
+                Nome completo <span class="required">*</span>
+              </label>
+              <input class="form-input" type="text" id="nome" name="nome" autocomplete="name" required />
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="canal">
+                Onde você costuma pedir? <span class="required">*</span>
+              </label>
+              <select class="form-select" id="canal" name="canal" required>
+                <option value="">Selecione uma opção</option>
+                <option value="whatsapp">WhatsApp</option>
+                <option value="instagram">Instagram</option>
+              </select>
+            </div>
+
+            <button type="button" id="btn-continuar" class="secondary-btn">
+              Continuar
+            </button>
           </div>
 
-          <div class="form-row">
-            <label class="form-label" for="telefone">
-              Celular (WhatsApp) <span class="required">*</span>
-            </label>
-            <input class="form-input" type="tel" id="telefone" name="telefone" inputmode="tel" placeholder="(11) 9XXXX-XXXX" required />
-            <div class="helper-text">O voucher ficará vinculado a esse número de celular.</div>
+          <!-- PASSO 2 -->
+          <div id="step-2" class="form-step hidden">
+            <h2>Agora, seu WhatsApp</h2>
+            <p>
+              Seu voucher será enviado pelo WhatsApp e ficará vinculado ao seu número
+              para garantirmos um desconto de boas-vindas por cliente.
+            </p>
+
+            <div class="form-row">
+              <label class="form-label" for="telefone">
+                Celular (WhatsApp) <span class="required">*</span>
+              </label>
+              <input
+                class="form-input"
+                type="tel"
+                id="telefone"
+                name="telefone"
+                inputmode="tel"
+                placeholder="(11) 9XXXX-XXXX"
+                required
+              />
+              <div class="helper-text">
+                Não enviamos spam. Usamos esse número apenas para o seu voucher e comunicações da Açucaré.
+              </div>
+            </div>
+
+            <div class="form-checkbox-row">
+              <input type="checkbox" id="lgpd" />
+              <label for="lgpd">
+                Autorizo o uso dos meus dados para contato sobre meu voucher e comunicações da Açucaré.
+                Não compartilhamos com terceiros.
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              Gerar meu voucher 💚
+            </button>
+
+            <div id="form-status" class="form-status"></div>
           </div>
-
-          <div class="form-row">
-            <label class="form-label" for="canal">
-              Onde você costuma pedir? <span class="required">*</span>
-            </label>
-            <select class="form-select" id="canal" name="canal" required>
-              <option value="">Selecione uma opção</option>
-              <option value="whatsapp">WhatsApp</option>
-              <option value="instagram">Instagram</option>
-            </select>
-          </div>
-
-          <div class="form-checkbox-row">
-            <input type="checkbox" id="lgpd" required />
-            <label for="lgpd">
-              Autorizo o uso dos meus dados para contato sobre meu voucher e comunicações da Açucaré. Não compartilhamos com terceiros.
-            </label>
-          </div>
-
-          <button type="submit" class="submit-btn">
-            Gerar meu voucher 💚
-          </button>
-
-          <div id="form-status" class="form-status"></div>
         </form>
       </section>
 
@@ -537,67 +639,119 @@
         formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
-  
+
     const form = document.getElementById('voucher-form');
     const statusEl = document.getElementById('form-status');
-  
-    // URL do seu Web App do Apps Script
-    const API_URL = 'https://script.google.com/macros/s/AKfycbyS_bx73KJ1ZNW3867y7RzZf9-C555Kstu3MfacEfYpsktnNSuKMddYXYepcG2NNkbE/exec';
-  
-    // Campo de telefone com máscara
+
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const indicatorStep1 = document.getElementById('indicator-step-1');
+    const indicatorStep2 = document.getElementById('indicator-step-2');
+    const stepCaption = document.getElementById('step-caption');
+
+    const btnContinuar = document.getElementById('btn-continuar');
+
     const telInput = document.getElementById('telefone');
-  
+
+    const API_URL =
+      'https://script.google.com/macros/s/AKfycbyS_bx73KJ1ZNW3867y7RzZf9-C555Kstu3MfacEfYpsktnNSuKMddYXYepcG2NNkbE/exec';
+
+    // máscara de telefone
     telInput.addEventListener('input', () => {
-      let v = telInput.value.replace(/\D/g, ''); // só dígitos
-      if (v.length > 11) v = v.slice(0, 11);     // máximo 11 dígitos
-  
+      let v = telInput.value.replace(/\D/g, '');
+      if (v.length > 11) v = v.slice(0, 11);
+
       let formatted = '';
-  
+
       if (v.length > 0) {
         if (v.length <= 2) {
-          // (11
           formatted = '(' + v;
         } else if (v.length <= 6) {
-          // (11) 9XXX
           formatted = `(${v.slice(0, 2)}) ${v.slice(2)}`;
         } else if (v.length <= 10) {
-          // (11) 3XXX-XXXX  (fixo ou incompleto)
           formatted = `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
         } else {
-          // (11) 9XXXX-XXXX  (celular 11 dígitos)
           formatted = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
         }
       }
-  
+
       telInput.value = formatted;
     });
-  
+
+    // troca visual entre passos
+    function irParaPasso2() {
+      step1.classList.add('hidden');
+      step2.classList.remove('hidden');
+      indicatorStep1.classList.remove('active');
+      indicatorStep2.classList.add('active');
+      stepCaption.textContent = 'Passo final: só confirmar seu WhatsApp 💬';
+
+      const formSection = document.getElementById('form-section');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    btnContinuar.addEventListener('click', () => {
+      const nome = form.nome.value.trim();
+      const canal = form.canal.value;
+
+      if (!nome) {
+        alert('Por favor, informe seu nome antes de continuar.');
+        return;
+      }
+
+      if (!canal) {
+        alert('Por favor, selecione onde você costuma pedir.');
+        return;
+      }
+
+      irParaPasso2();
+    });
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-  
+
       statusEl.className = 'form-status';
       statusEl.textContent = '';
-  
-      const nome = form.nome.value;
+
+      const nome = form.nome.value.trim();
       const rawTel = form.telefone.value || '';
-      const telDigits = rawTel.replace(/\D/g, ''); // tira formatação
+      const telDigits = rawTel.replace(/\D/g, '');
       const canal = form.canal.value;
-  
-      // valida tamanho (10 ou 11 dígitos)
+      const lgpdOk = document.getElementById('lgpd').checked;
+
+      if (!nome || !canal) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Volte ao passo 1 e preencha nome e canal de contato.';
+        step1.classList.remove('hidden');
+        step2.classList.add('hidden');
+        indicatorStep1.classList.add('active');
+        indicatorStep2.classList.remove('active');
+        stepCaption.textContent = 'Leva menos de 30 segundos 🙂';
+        return;
+      }
+
       if (telDigits.length < 10 || telDigits.length > 11) {
         statusEl.className = 'form-status error';
         statusEl.textContent = 'Por favor, informe um celular válido com DDD.';
         return;
       }
-  
+
+      if (!lgpdOk) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Para seguir, precisamos da sua autorização de uso dos dados.';
+        return;
+      }
+
       statusEl.textContent = 'Enviando seus dados...';
-  
+
       const payload = {
         nome: nome,
-        telefone: telDigits, // vai limpinho pro Apps Script
+        telefone: telDigits,
         canal: canal
       };
-  
+
       fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -605,70 +759,73 @@
         },
         body: JSON.stringify(payload)
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok) {
-          // mensagem base que vem do Apps Script ou um padrão
-          const baseMsg = data.mensagem || 'Voucher gerado com sucesso! 💚';
+        .then(res => res.json())
+        .then(data => {
+          if (data.ok) {
+            const baseMsg = data.mensagem || 'Voucher gerado com sucesso! 💚';
 
-          if (data.codigo) {
-            const codigo = data.codigo;
+            if (data.codigo) {
+              const codigo = data.codigo;
 
-            // link de whatsapp com mensagem pronta
-            const whatsappURL = `https://wa.me/5511991160707?text=${encodeURIComponent(
-              `Olá! Quero meus 15% de desconto da Açucaré. Meu voucher é: ${codigo}`
-            )}`;
+              const whatsappURL = `https://wa.me/5511991160707?text=${encodeURIComponent(
+                `Olá! Quero meus 15% de desconto da Açucaré. Meu voucher é: ${codigo}`
+              )}`;
 
-            statusEl.className = 'form-status ok voucher-highlight';
-            statusEl.innerHTML = `
-              <span>${baseMsg}</span>
-              <span class="voucher-code">${codigo}</span>
+              statusEl.className = 'form-status ok voucher-highlight';
+              statusEl.innerHTML = `
+                <span>${baseMsg}</span>
+                <span class="voucher-code">${codigo}</span>
 
-              <a 
-                href="${whatsappURL}" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="whatsapp-btn"
-                style="
-                  display:inline-block;
-                  margin-top:10px;
-                  padding:8px 14px;
-                  background:#25d366;
-                  color:white;
-                  border-radius:999px;
-                  font-weight:600;
-                  font-size:13px;
-                  text-decoration:none;
-                  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-                "
-              >
-                Usar agora no WhatsApp
-              </a>
+                <a 
+                  href="${whatsappURL}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="whatsapp-btn"
+                  style="
+                    display:inline-block;
+                    margin-top:10px;
+                    padding:8px 14px;
+                    background:#25d366;
+                    color:white;
+                    border-radius:999px;
+                    font-weight:600;
+                    font-size:13px;
+                    text-decoration:none;
+                    box-shadow:0 4px 12px rgba(0,0,0,0.25);
+                  "
+                >
+                  Usar agora no WhatsApp
+                </a>
 
-              <span class="voucher-note">
-                Caso prefira, copie o código e use na hora do seu primeiro pedido.
-              </span>
-            `;
+                <span class="voucher-note">
+                  Caso prefira, copie o código e use na hora do seu primeiro pedido.
+                </span>
+              `;
+            } else {
+              statusEl.className = 'form-status ok';
+              statusEl.textContent = baseMsg;
+            }
+
+            form.reset();
+            // volta pro passo 1 se a pessoa quiser gerar outro depois
+            step1.classList.remove('hidden');
+            step2.classList.add('hidden');
+            indicatorStep1.classList.add('active');
+            indicatorStep2.classList.remove('active');
+            stepCaption.textContent = 'Leva menos de 30 segundos 🙂';
           } else {
-            // caso raro: ok mas sem código (ex: já tem voucher)
-            statusEl.className = 'form-status ok';
-            statusEl.textContent = baseMsg;
+            statusEl.className = 'form-status error';
+            statusEl.textContent =
+              data.mensagem || 'Não foi possível gerar o voucher. Tente novamente.';
           }
-
-          form.reset();
-        } else {
+        })
+        .catch(err => {
+          console.error(err);
           statusEl.className = 'form-status error';
           statusEl.textContent =
-            data.mensagem || 'Não foi possível gerar o voucher. Tente novamente.';
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        statusEl.className = 'form-status error';
-        statusEl.textContent =
-          'Erro ao enviar seus dados. Verifique sua conexão e tente novamente.';
-      });
+            'Erro ao enviar seus dados. Verifique sua conexão e tente novamente.';
+        });
     });
   </script>
-  </body>
+</body>
 </html>
